@@ -1,0 +1,64 @@
+   #include <REGX52.H>                                                                            问题：LEDNum 实际共有八个 利用其来进行LED移位
+
+   unsigned char LEDNum;
+           
+   void Delay( unsigned int xms)		//@12.000MHz           有点难理解                        
+{
+   unsigned char i, j;
+   
+   while(xms--)                                                       //自定义延时
+    {
+           i = 2;
+           j = 239;
+          
+         do
+          {
+             while (--j);
+           } 	
+           while (--i);
+		
+     }
+	
+}
+	
+
+    void main()
+{
+     P2=~0X01;
+      while(1)
+    {
+	    
+         if(P3_1==0)                                    //第一个按键
+	{
+			
+	   Delay(20);
+	   while(P3_1==0);                  
+	   Delay(20);
+				
+	   LEDNum++;
+	   if(LEDNum>=8)                    //预防溢出
+                   LEDNum=0;
+                   P2=~(0x01<<LEDNum);	//0进行左移位			
+			
+	}
+                
+          if(P3_0==0)                               //第二个按键
+           {
+			
+               Delay(20);
+               while(P3_0==0);
+               Delay(20);
+				
+				
+              if(LEDNum==0)
+              LEDNum=7;
+              else
+              LEDNum--;
+              P2=~(0x01<<LEDNum);
+				
+             }	 
+      }
+
+
+
+}

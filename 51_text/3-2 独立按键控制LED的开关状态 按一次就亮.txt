@@ -1,0 +1,41 @@
+#include <REGX52.H>
+void Delay(unsigned int xms)		//@12.000MHz
+{
+	unsigned char i, j;
+  
+	while(xms)   //control delay by yourself
+	{
+	   i = 2;  
+	   j = 239;
+	   do
+			{
+				while (--j);
+	    } 
+			while (--i);
+			xms--;
+	}
+}
+
+void main()
+{ 
+
+			while(1) //endless  loop
+			{
+			  
+				 if(P3_1==0) /*estimate independent buttom condition 0 mean low electric level  可以一次点亮的关键，if函数和取反操作
+					            and that means you press the buttom */
+				 {
+				   Delay(20);  //remove the influence of momently unsteady current 
+					 while(P3_1==0);   /*recognize the buttom condition 0 mean press 1 mean loosen
+															if 0 and the loop will go head with the upper statement*/
+					 Delay(20);   // the same
+					 
+					 P2_0=~P2_0;       /* the first time  the led  change from 1 to 0 
+					                    and the second time it changes from 0 to 1*/
+				 }
+			    
+			    
+			}
+
+
+}

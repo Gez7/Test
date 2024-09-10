@@ -1,0 +1,87 @@
+#include <REGX52.H>
+
+void Delay( unsigned int xms)		//@12.000MHz
+{
+	unsigned char i, j;
+  while(xms--)
+	{
+		i = 2;
+	  j = 239;
+	  do
+		{
+			while (--j);
+	} 	while (--i);
+		
+  }
+	
+}
+	
+
+
+void main()
+{
+	
+	 unsigned char LEDNum=0; //怎么代表着二进制？
+	 
+   while(1)
+ {
+			
+    if(P3_1==0)
+      {				//P3 代表着按钮
+	Delay(20);
+	while(P3_1==0);
+	Delay(20);
+				  //1111 1111
+	LEDNum++;//overflow
+	 P2=~LEDNum;
+			}
+	 
+	 }
+
+
+}
+
+
+Or
+#include <REGX52.H>
+
+void Delay( unsigned int xms)		//@12.000MHz
+{
+	unsigned char i, j;
+  while(xms--)
+	{
+		i = 2;
+	  j = 239;
+	  do
+		{
+			while (--j);
+	} 	while (--i);
+		
+  }
+	
+}
+	
+
+
+void main()
+{
+	
+	 
+	 
+   while(1)
+	 {
+			
+		 if(P3_1==0)
+			{				
+					Delay(20);
+				  while(P3_1==0);
+				  Delay(20);
+				  //1111 1111
+				  P2--;
+				  
+			}
+	 
+	 }
+
+
+}
